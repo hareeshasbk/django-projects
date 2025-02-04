@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Admin Dashboard</h1>
+
+{% if user.is_authenticated %}
+    <p><strong>username:</strong>{{ user.username }}
+    </p>
+
+    <p><strong>email:</strong>{{ user.email }}</p>
+    <p><strong>firstname:</strong>{{ user.first_name }}</p>
+    <a href="{url 'logout' %}">Logout</a>
+    {% else %}
+        <p>Hello,Guest</p>
+            {% endif %}
+    
+</body>
+</html>

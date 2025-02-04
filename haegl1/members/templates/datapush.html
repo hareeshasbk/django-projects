@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h3>Members Detail</h3>
+    <hr/>
+    <form method="POST" action="/datapush/">
+        {% csrf_token %}
+        <table border="1" cellpadding="5">
+            <tr>
+                <th>First Name</th>
+                <td><input type="text" name="firstname" /></td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="lastname" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    </form>
+
+
+
+</body>
+</html>
