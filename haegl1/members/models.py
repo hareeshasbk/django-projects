@@ -11,5 +11,9 @@ class StudentInfo(models.Model):
  StudentEmail=models.CharField(max_length=255,default='None')
  StudentAddress=models.CharField(max_length=255,default='None')
 
+class EmployeeDetails(models.Model):
+ club_name = models.CharField(max_length=255)
+ joining_date = models.DateField()
+ member=models.ForeignKey('EmployeeInfo',on_delete=models.CASCADE)
 
 
