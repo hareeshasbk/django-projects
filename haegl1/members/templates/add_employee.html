@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<h1>Add Employee Details</h1>
+<form method="POST">
+
+    {% csrf_token %}
+    <label for="club_name">Club Name:</label>
+    <input type="text" id="club_name" name="club_name" required><br><br>
+    <label for="joining_date"> Joining Date:</label>
+    <input type="date" id="joining_date" name="joining_date" required><br><br>
+
+    <label for="Employee">Select Employee:</label>
+    <select id="Employee" name="Employee" required>
+        <option value="">Select Employee</option>
+        {% for Employee in Employee %}
+        <option value="{{ Employee.id }}">{{ Employee.firstname }} {{ Employee.lastname }}</option>
+        {% endfor %}
+        </select><br><br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+</body>
+</html>
+
+

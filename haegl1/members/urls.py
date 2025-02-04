@@ -15,4 +15,6 @@ urlpatterns = [
  path('staffdashboard/',views.staff_dashboard,name="staffdashboard"),
  path('admindashboard/',views.admin_dashboard,name="admindashboard"),
  path('pr/',views.pr,name="pages_register"),
+ path('md/',views.Membership_Details,name="add_employee"),
+
  ]

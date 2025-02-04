@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.template import loader
-from .models import EmployeeInfo
+# from .models import EmployeeInfo
+from .models import EmployeeInfo,EmployeeDetails
 
 def members_data(request):
    mymembers=EmployeeInfo.objects.all().values()
@@ -156,4 +157,18 @@ def pr(request):
          return redirect('members_data')
     else:
        return render(request, 'pr.html')
+
+
+
+def Membership_Details(request):
+   Employee=EmployeeInfo.objects.all() # fetch all available employees    
+   if request.method=='POST':
+      club_name=request.POST.get('club_name')
+      joining_date=request.POST.get('joining_date')
+      Employee_id=request.POST.get('Employee')
+
+      Employee=EmployeeInfo.objects.get(id=Employee_id)
+      EmployeeDetails.objects.create(club_name=club_name,joining_date=joining_date,Employee=Employee)
+      return redirect('members_data')
+   return render(request,'add_employee.html',{'Employee':Employee})
 

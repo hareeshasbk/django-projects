@@ -14,6 +14,6 @@ class StudentInfo(models.Model):
 class EmployeeDetails(models.Model):
  club_name = models.CharField(max_length=255)
  joining_date = models.DateField()
- member=models.ForeignKey('EmployeeInfo',on_delete=models.CASCADE)
+ Employee=models.ForeignKey('EmployeeInfo',on_delete=models.CASCADE)
 
 
