@@ -3,8 +3,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse
 from django.template import loader
-# from .models import EmployeeInfo
 from .models import EmployeeInfo,EmployeeDetails
+from django.contrib.auth.decorators import login_required
+
 
 def members_data(request):
    mymembers=EmployeeInfo.objects.all().values()
@@ -37,6 +38,23 @@ def register(request):
       else:
          return render(request, 'register.html')
       
+# def user_login(request):
+#    if request.method == 'POST':
+#       username = request.POST.get('username')
+#       password = request.POST.get('password')
+#       user = authenticate(request,username=username, password=password)
+#       if user is not None:
+#          login(request, user)
+#          # check superuser
+#          if user.is_superuser:
+#             return redirect('admindashboard') #redirect admin dashboard
+#          elif user.is_active:
+#             return redirect('members_data') #redirect staff dashboard
+#          else:
+#             context={'error_message':'Invalid username or password.'}
+#             return render(request,'login.html',context)
+#    return render(request,'login.html')
+
 def user_login(request):
    if request.method == 'POST':
       username = request.POST.get('username')
@@ -53,8 +71,9 @@ def user_login(request):
             return redirect('studentdashboard') #redirect student dashboard
       else:
          return render(request, 'login.html', {'error': 'Invalid username or password'})
-   return render(request, 'login.html')
-      
+   return render(request, 'login.html')     
+
+
 def staffregister(request):
       if request.method == 'POST':
          firstname = request.POST.get('firstname')
@@ -121,9 +140,15 @@ def studentdashboard(request):
         return redirect('members_data')
     else:
         return render(request,'studentdashboard.html')
-    
+
+
+@login_required
 def admin_dashboard(request):
    user=request.user
+
+   #Check if the user is a superuser
+   if not user.is_superuser:
+      return redirect('no_access') # Redirect to an appropriate page
    context={
       'user':user
    }
@@ -171,4 +196,7 @@ def Membership_Details(request):
       EmployeeDetails.objects.create(club_name=club_name,joining_date=joining_date,Employee=Employee)
       return redirect('members_data')
    return render(request,'add_employee.html',{'Employee':Employee})
+
+def no_access(request):
+   return render(request,'no_access.html')
 

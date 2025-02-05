@@ -16,5 +16,5 @@ urlpatterns = [
  path('admindashboard/',views.admin_dashboard,name="admindashboard"),
  path('pr/',views.pr,name="pages_register"),
  path('md/',views.Membership_Details,name="add_employee"),
-
+ path('no-access/',views.no_access,name='no_access'),
  ]
